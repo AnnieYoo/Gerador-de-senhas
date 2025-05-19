@@ -47,7 +47,13 @@ button:focus-visible {
 }
 
 p {
-  border: 1px solid rgb(18, 29, 172);
   height: 2em;
   text-align: center;
+}
+
+#passwordSize {
+  width: 20em;
+  text-align: center;
+  margin-bottom: 1em;
+  margin-left: 5em;
 }
