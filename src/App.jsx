@@ -3,7 +3,10 @@ import { useState } from "react";
 export default function App() {
   const [passwordText, setPasswordText] = useState();
   const [copyText, setCopyText] = useState("Copiar");
-  const [passwordSize, setPasswordSize] = useState(12);
+  const [customSize, setCustomSize] = useState(12);
+  const [showInput, setShowInput] = useState(false);
+
+  const passwordSize = showInput ? customSize : 8;
 
   function caracter() {
     const caracter =
@@ -26,15 +29,31 @@ export default function App() {
   return (
     <>
       <h1>Gerador de senhas</h1>
-      <input
-        type="Number"
-        min={1}
-        id="passwordSize"
-        value={passwordSize}
-        onChange={(ev) => setPasswordSize(ev.target.value)}
-      />
+      <div className="content">
+        <label htmlFor="passwordShow">Customizar tamanho:</label>
+        <input
+          type="checkbox"
+          id="passwordShow"
+          value={showInput}
+          onChange={() => setShowInput((currentState) => !currentState)}
+        />
+      </div>
+
+      {showInput ? (
+        <div>
+          <input
+            type="Number"
+            min={1}
+            id="passwordSize"
+            value={customSize}
+            onChange={(ev) => setCustomSize(ev.target.value)}
+          />
+        </div>
+      ) : null}
       <div>
-        <button onClick={caracter}>Gerar</button>
+        <button onClick={caracter}>
+          Gerar senha de {passwordSize} caracteres
+        </button>
         <button onClick={copy}>{copyText}</button>
         <p>{passwordText}</p>
       </div>
